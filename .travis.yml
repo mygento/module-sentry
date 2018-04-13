@@ -1,0 +1,18 @@
+language: php
+php:
+- 7.0
+- 7.1
+
+before_script:
+- sudo apt-get install libxml2-utils
+- composer self-update
+- echo "{\"http-basic\":{\"repo.magento.com\":{\"username\":\"${MAGE_LOGIN}\",\"password\":\"${MAGE_PWD}\"}}}" > auth.json
+- phpenv config-rm xdebug.ini
+- composer install --no-interaction --prefer-dist
+- php vendor/bin/phpcs --config-set ignore_warnings_on_exit 1
+- php vendor/bin/phpcs --config-set show_warnings 0
+script:
+- php vendor/bin/grumphp run
+env:
+  global:
+    secure: YoEeQgZTs5Jx1t0YIYlDriYuZjfHa76XWjqD1BWAAft69a9n/BhebPch7A+scJFfZv3Paxr6n/odjyyOCcu7Ic15wGPkzgAD8KCleOmdXhIg8rxlngBT7jlBP1E671VBfVHIBwuo4HeLNqt711jJfgoWAkjnUDvqzdTnoC2m5JCondat8lxDfNuHpV93erfmNgnZ44IvzhO04/v9+2BJkOEbhT21hJGxI9rWfQwUmRvkuBhsA44QGWOdodywyRDdU+sVYdKg6o/F+N/SO6nrbbB1K+QxLFTU59X12bK3C4DpnrXNVPAS/VbPINhIygaIPgXgDgyKQnbKL0iut+OBy0vPsORwQ4cGlr0XOPsQQGK9aed+QpdY+Xhxl8KAH9vKd61yauGYb8pL4+yMpnPRpV88yQTkL2ECwzlbxVUKaSKPU7W6W7vUimjuno6iuaCOCLtRl1ngWShua0iBhOhtz9UhOoAdPM+GvVKm7LF5ZM4w3dpRI9xpgw0UfY9yTA9w/a/1ODo68Hb23JjVgzCO6XCN+eevMFBmfvq+mg/tQnrwqMDBaz2l4LlGzxpFyswDGKSHvlli1iN78Hpja3ZLHmba+dMfW9lr1lnRJzcz/awZgwpnIr5vQQyb7rFN+kZqG2V/JAVvDeTan5FDSHQ1gyHZwtp+W9Gt9Yq4ZbEanKQ=

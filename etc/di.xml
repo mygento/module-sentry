@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Mygento Team
+ * @package Mygento_Sentry
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Mygento\Base\Model\LogManager">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="sentry" xsi:type="object">Mygento\Sentry\Model\SentryHandler</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Logger\Monolog">
+        <plugin name="mygento_sentry_monolog" type="Mygento\Sentry\Plugin\Monolog" />
+    </type>
+    <type name="Magento\Framework\App\Http">
+        <plugin name="mygento_sentry_catcher" type="Mygento\Sentry\Plugin\Catcher" />
+    </type>
+</config>
