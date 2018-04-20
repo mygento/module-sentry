@@ -1,6 +1,6 @@
 Magento 2 Sentry Logger
 
-[![Build Status](https://travis-ci.org/mygento/module-sentry.svg?branch=m2)](https://travis-ci.org/mygento/module-sentry)
+[![Build Status](https://travis-ci.org/mygento/module-sentry.svg?branch=v2.2)](https://travis-ci.org/mygento/module-sentry)
 [![Latest Stable Version](https://poser.pugx.org/mygento/module-sentry/v/stable)](https://packagist.org/packages/mygento/module-sentry)
 [![Total Downloads](https://poser.pugx.org/mygento/module-sentry/downloads)](https://packagist.org/packages/mygento/module-sentry)
 
