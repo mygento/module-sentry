@@ -1,8 +1,11 @@
 <?php
+
 /**
- * @author Mygento
+ * @author Mygento Team
+ * @copyright 2017-2018 Mygento (https://www.mygento.ru)
  * @package Mygento_Sentry
  */
+
 namespace Mygento\Sentry\Plugin;
 
 class Catcher

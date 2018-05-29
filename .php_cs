@@ -1,4 +1,10 @@
 <?php
+$header = <<<EOF
+@author Mygento Team
+@copyright 2017-2018 Mygento (https://www.mygento.ru)
+@package Mygento_Sentry
+EOF;
+
 $finder = PhpCsFixer\Finder::create()
     ->in('.')
     ->name('*.phtml')
@@ -28,6 +34,8 @@ return PhpCsFixer\Config::create()
         'no_extra_consecutive_blank_lines' => true,
         'no_leading_import_slash' => true,
         'no_leading_namespace_whitespace' => true,
+        'no_multiline_whitespace_around_double_arrow' => true,
+        'no_multiline_whitespace_before_semicolons' => true,
         'no_singleline_whitespace_before_semicolons' => true,
         'no_trailing_comma_in_singleline_array' => true,
         'no_unused_imports' => true,
@@ -36,5 +44,16 @@ return PhpCsFixer\Config::create()
         'ordered_imports' => true,
         'standardize_not_equals' => true,
         'ternary_operator_spaces' => true,
+        // mygento
+        'header_comment' => ['header' => $header, 'commentType'=>'PHPDoc'],
+        'phpdoc_order' => true,
+        'phpdoc_types' => true,
+        'phpdoc_add_missing_param_annotation' => true,
+        'single_quote' => true,
+        'standardize_not_equals' => true,
+        'ternary_to_null_coalescing' => true,
+        'ternary_operator_spaces' => true,
+        'lowercase_cast' => true,
+        'no_empty_comment' => true,
+        'no_empty_phpdoc' => true,
     ]);
-

@@ -14,7 +14,11 @@
         </arguments>
     </type>
     <type name="Magento\Framework\Logger\Monolog">
-        <plugin name="mygento_sentry_monolog" type="Mygento\Sentry\Plugin\Monolog" />
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="sentry" xsi:type="object">Mygento\Sentry\Model\SentryHandler\Proxy</item>
+            </argument>
+        </arguments>
     </type>
     <type name="Magento\Framework\App\Http">
         <plugin name="mygento_sentry_catcher" type="Mygento\Sentry\Plugin\Catcher" />
