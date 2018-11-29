@@ -8,7 +8,7 @@
 
 namespace Mygento\Sentry\Plugin;
 
-class Catcher
+class HttpCatcher
 {
     /* @var \Magento\Framework\Logger\Monolog */
     private $logger;

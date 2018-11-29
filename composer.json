@@ -1,7 +1,7 @@
 {
     "name": "mygento/module-sentry",
     "type": "magento2-module",
-    "version": "2.2.0",
+    "version": "2.2.1",
     "license": "OSL-3.0",
     "homepage": "https://github.com/mygento/module-sentry",
     "description": "Magento 2 Sentry Logger",
@@ -27,7 +27,7 @@
         "sentry/sentry": "^1.8.4"
     },
     "require-dev": {
-        "mygento/coding-standard": "2.*"  
+        "mygento/coding-standard": "2.*"
     },
     "autoload": {
         "files": [
