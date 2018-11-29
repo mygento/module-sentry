@@ -21,6 +21,9 @@
         </arguments>
     </type>
     <type name="Magento\Framework\App\Http">
-        <plugin name="mygento_sentry_catcher" type="Mygento\Sentry\Plugin\Catcher" />
+        <plugin name="mygento_sentry_http_catcher" type="Mygento\Sentry\Plugin\HttpCatcher" />
+    </type>
+    <type name="Magento\Framework\Webapi\ErrorProcessor">
+        <plugin name="mygento_sentry_webapi_catcher" type="Mygento\Sentry\Plugin\WebapiCatcher" />
     </type>
 </config>
