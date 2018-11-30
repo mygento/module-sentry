@@ -10,7 +10,9 @@ namespace Mygento\Sentry\Plugin;
 
 class HttpCatcher
 {
-    /* @var \Magento\Framework\Logger\Monolog */
+    /**
+     * @var \Magento\Framework\Logger\Monolog
+     */
     private $logger;
 
     /**
@@ -24,6 +26,9 @@ class HttpCatcher
 
     /**
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @param \Magento\Framework\App\Http $subject
+     * @param \Magento\Framework\App\Bootstrap $bootstrap
+     * @param \Exception $exception
      */
     public function beforeCatchException(
         \Magento\Framework\App\Http $subject,

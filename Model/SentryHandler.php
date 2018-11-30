@@ -10,9 +10,14 @@ namespace Mygento\Sentry\Model;
 
 class SentryHandler extends \Monolog\Handler\RavenHandler
 {
-    /* @var \Magento\Framework\App\Config\ScopeConfigInterface */
+    /**
+     * @var \Magento\Framework\App\Config\ScopeConfigInterface
+     */
     private $scopeConfig;
 
+    /**
+     * @param \Magento\Framework\App\Config\ScopeConfigInterface\Proxy $scopeConfig
+     */
     public function __construct(
         \Magento\Framework\App\Config\ScopeConfigInterface\Proxy $scopeConfig
     ) {
@@ -30,7 +35,7 @@ class SentryHandler extends \Monolog\Handler\RavenHandler
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function isHandling(array $record)
     {

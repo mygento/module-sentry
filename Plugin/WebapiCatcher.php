@@ -10,7 +10,9 @@ namespace Mygento\Sentry\Plugin;
 
 class WebapiCatcher
 {
-    /* @var \Magento\Framework\Logger\Monolog */
+    /**
+     * @var \Magento\Framework\Logger\Monolog
+     */
     private $logger;
 
     /**
@@ -24,6 +26,7 @@ class WebapiCatcher
 
     /**
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @param \Magento\Framework\Webapi\ErrorProcessor $subject
      * @param mixed $result
      */
     public function afterApiShutdownFunction(
