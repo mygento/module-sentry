@@ -26,7 +26,8 @@
     "require": {
         "magento/framework": "102.*",
         "magento/module-config": "101.*",
-        "sentry/sdk": "^2.0"
+        "sentry/sdk": "^2.0",
+        "nyholm/psr7": "^1.1.0"
     },
     "require-dev": {
         "mygento/coding-standard": "^2.13.5"

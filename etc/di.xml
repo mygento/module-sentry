@@ -16,7 +16,7 @@
     <type name="Magento\Framework\Logger\Monolog">
         <arguments>
             <argument name="handlers" xsi:type="array">
-                <item name="sentry" xsi:type="object">Mygento\Sentry\Model\SentryHandler\Proxy</item>
+                <item name="sentry" xsi:type="object">Mygento\Sentry\Model\SentryHandler</item>
             </argument>
         </arguments>
     </type>
