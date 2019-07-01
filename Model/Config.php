@@ -82,7 +82,10 @@ class Config
     public function getHub()
     {
         if ($this->hub === null) {
-            \Sentry\init(['dsn' => $this->getConnection()]);
+            \Sentry\init([
+                'dsn' => $this->getConnection(),
+                'environment' => $this->getEnvironment() ?? null,
+            ]);
             $this->hub = \Sentry\State\Hub::getCurrent();
         }
 
