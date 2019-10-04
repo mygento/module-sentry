@@ -26,4 +26,7 @@
     <type name="Magento\Framework\Webapi\ErrorProcessor">
         <plugin name="mygento_sentry_webapi_catcher" type="Mygento\Sentry\Plugin\WebapiCatcher" />
     </type>
+    <type name="Magento\Framework\App\Config">
+        <plugin name="mygento_sentry_cache_invalidation" type="Mygento\Sentry\Plugin\CacheInvalidationPlugin" />
+    </type>
 </config>
