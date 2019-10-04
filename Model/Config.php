@@ -10,27 +10,48 @@ namespace Mygento\Sentry\Model;
 
 class Config
 {
+    /**
+     * @var string
+     */
     private $connection;
 
+    /**
+     * @var string
+     */
     private $loglevel;
 
+    /**
+     * @var string
+     */
     private $environment;
 
+    /**
+     * @var bool
+     */
     private $enabled;
 
     /**
-     * @var \Magento\Framework\App\Config\ScopeConfigInterface\Proxy
+     * @var \Magento\Framework\App\Config\ScopeConfigInterface
      */
     private $scopeConfig;
 
+    /**
+     * @var \Sentry\State\HubInterface
+     */
     private $hub;
 
+    /**
+     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
+     */
     public function __construct(
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
     ) {
         $this->scopeConfig = $scopeConfig;
     }
 
+    /**
+     * @return string
+     */
     public function getConnection()
     {
         if ($this->connection === null) {
@@ -43,6 +64,9 @@ class Config
         return $this->connection;
     }
 
+    /**
+     * @return string
+     */
     public function getLogLevel()
     {
         if ($this->loglevel === null) {
@@ -55,6 +79,9 @@ class Config
         return $this->loglevel;
     }
 
+    /**
+     * @return string
+     */
     public function getEnvironment()
     {
         if ($this->loglevel !== null) {
@@ -67,6 +94,9 @@ class Config
         return $this->environment;
     }
 
+    /**
+     * @return bool
+     */
     public function isEnabled(): bool
     {
         if ($this->enabled === null) {
@@ -79,6 +109,9 @@ class Config
         return (bool) $this->enabled;
     }
 
+    /**
+     * @return \Sentry\State\HubInterface
+     */
     public function getHub()
     {
         if ($this->hub === null) {

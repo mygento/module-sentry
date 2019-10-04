@@ -41,6 +41,11 @@ class SentryHandler extends \Monolog\Handler\AbstractProcessingHandler
     protected $batchFormatter;
 
     /**
+     * @var bool
+     */
+    protected $bubble = true;
+
+    /**
      * @var \Mygento\Sentry\Model\Config
      */
     private $config;
@@ -55,10 +60,11 @@ class SentryHandler extends \Monolog\Handler\AbstractProcessingHandler
     ) {
         $this->config = $config;
         parent::__construct();
+        $this->bubble = $bubble;
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function handleBatch(array $records): void
     {
@@ -147,6 +153,10 @@ class SentryHandler extends \Monolog\Handler\AbstractProcessingHandler
         return $this;
     }
 
+    /**
+     * @param string $value
+     * @return self
+     */
     public function setEnvironment($value): self
     {
         $this->environment = $value;
@@ -156,6 +166,7 @@ class SentryHandler extends \Monolog\Handler\AbstractProcessingHandler
 
     /**
      * @link https://docs.sentry.io/learn/breadcrumbs/
+     * @param Breadcrumb $crumb
      */
     public function addBreadcrumb(Breadcrumb $crumb): self
     {
@@ -204,7 +215,11 @@ class SentryHandler extends \Monolog\Handler\AbstractProcessingHandler
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.NPathComplexity)
+     *
      * @suppress PhanTypeMismatchArgument
      */
     protected function write(array $record): void
@@ -240,7 +255,7 @@ class SentryHandler extends \Monolog\Handler\AbstractProcessingHandler
                     $scope->setUser($record['context']['user']);
                     unset($record['context']['user']);
                 }
-
+                // phpcs:disable
                 $scope->addEventProcessor(
                     function (Event $event) use ($record) {
                         if (!empty($record['context']['logger'])) {
@@ -265,7 +280,7 @@ class SentryHandler extends \Monolog\Handler\AbstractProcessingHandler
                         return $event;
                     }
                 );
-
+                // phpcs:enable
                 if (isset($record['context']['exception']) && $record['context']['exception'] instanceof \Throwable) {
                     $this->getHub()->captureException($record['context']['exception']);
                 } else {
@@ -276,7 +291,7 @@ class SentryHandler extends \Monolog\Handler\AbstractProcessingHandler
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     protected function getDefaultFormatter(): FormatterInterface
     {
@@ -293,6 +308,9 @@ class SentryHandler extends \Monolog\Handler\AbstractProcessingHandler
         return new LineFormatter();
     }
 
+    /**
+     * @return \Sentry\State\HubInterface
+     */
     private function getHub()
     {
         return $this->config->getHub();
