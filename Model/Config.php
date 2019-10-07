@@ -119,7 +119,7 @@ class Config
                 'dsn' => $this->getConnection(),
                 'environment' => $this->getEnvironment() ?? null,
             ]);
-            $this->hub = \Sentry\State\Hub::getCurrent();
+            $this->hub = \Sentry\SentrySdk::getCurrentHub();
         }
 
         return $this->hub;

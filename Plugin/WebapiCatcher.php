@@ -11,17 +11,17 @@ namespace Mygento\Sentry\Plugin;
 class WebapiCatcher
 {
     /**
-     * @var \Magento\Framework\Logger\Monolog
+     * @var \Mygento\Sentry\Model\Config
      */
-    private $logger;
+    private $config;
 
     /**
-     * @param \Magento\Framework\Logger\Monolog $logger
+     * @param \Mygento\Sentry\Model\Config $config
      */
     public function __construct(
-        \Magento\Framework\Logger\Monolog $logger
+        \Mygento\Sentry\Model\Config $config
     ) {
-        $this->logger = $logger;
+        $this->config = $config;
     }
 
     /**
@@ -33,23 +33,7 @@ class WebapiCatcher
         \Magento\Framework\Webapi\ErrorProcessor $subject,
         $result
     ) {
-        $fatalErrorFlag = E_ERROR |
-            E_USER_ERROR |
-            E_PARSE |
-            E_CORE_ERROR |
-            E_COMPILE_ERROR |
-            E_RECOVERABLE_ERROR;
-        $error = error_get_last();
-        if ($error && $error['type'] & $fatalErrorFlag) {
-            $exception = new \ErrorException(
-                @$error['message'],
-                0,
-                @$error['type'],
-                @$error['file'],
-                @$error['line']
-            );
-            $this->logger->critical($exception);
-        }
+        $this->config->getHub()->captureLastError();
 
         return $result;
     }
