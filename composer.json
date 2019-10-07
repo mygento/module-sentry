@@ -25,10 +25,11 @@
     ],
     "require": {
         "magento/framework": "102.*",
-        "sentry/sentry": "^1.10.0"
+        "sentry/sentry": "^1.10.0",
+        "ocramius/package-versions": "^1.4.0"
     },
     "require-dev": {
-        "mygento/coding-standard": "^2.13.0"
+        "mygento/coding-standard": "^2.13.5"
     },
     "autoload": {
         "files": [
