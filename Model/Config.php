@@ -84,7 +84,7 @@ class Config
      */
     public function getEnvironment()
     {
-        if ($this->environment !== null) {
+        if ($this->environment === null) {
             $this->environment = $this->scopeConfig->getValue(
                 'sentry/general/environment',
                 \Magento\Store\Model\ScopeInterface::SCOPE_STORE
