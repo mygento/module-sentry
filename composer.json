@@ -26,7 +26,9 @@
     "require": {
         "magento/framework": "102.*",
         "magento/module-config": "101.*",
-        "sentry/sdk": "^2.0",
+        "sentry/sentry": "^2.2.2",
+        "http-interop/http-factory-guzzle": "^1.0",
+        "php-http/guzzle6-adapter": "^2.0",
         "nyholm/psr7": "^1.1.0",
         "ocramius/package-versions": "~1.4.0"
     },
