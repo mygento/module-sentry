@@ -27,8 +27,12 @@ class CacheInvalidationPlugin
 
     /**
      * Before cache invalidation
+     *
+     * @param \Magento\Framework\App\Config $subject
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function beforeClean()
+    public function beforeClean($subject)
     {
         $this->sentryConfigHelper->prepareSentryConfig();
     }
