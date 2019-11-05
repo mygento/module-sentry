@@ -21,6 +21,9 @@
                 <field id="connection" translate="label comment" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Connection String</label>
                 </field>
+                <field id="environment" translate="label comment" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Environment</label>
+                </field>
 <!--                <field id="customer_data" translate="label" type="select" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Collect Customer Data</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
