@@ -1,7 +1,7 @@
 {
     "name": "mygento/module-sentry",
     "type": "magento2-module",
-    "version": "2.3.1",
+    "version": "2.3.2",
     "license": "OSL-3.0",
     "homepage": "https://github.com/mygento/module-sentry",
     "description": "Magento 2 Sentry Logger",
@@ -30,7 +30,8 @@
         "http-interop/http-factory-guzzle": "^1.0",
         "php-http/guzzle6-adapter": "^2.0",
         "nyholm/psr7": "^1.1.0",
-        "ocramius/package-versions": "~1.4.0"
+        "ocramius/package-versions": "~1.4.0",
+        "jean85/pretty-package-versions": "~1.2.0"
     },
     "require-dev": {
         "mygento/coding-standard": "~2.13.5",
