@@ -17,3 +17,7 @@ parameters:
         phpcs:
             warning_severity: null
         xmllint:
+        phpstan:
+          ignore_patterns: ['Test']
+          level: 5
+        #psalm:

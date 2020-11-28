@@ -16,7 +16,7 @@ class Config
     private $connection;
 
     /**
-     * @var string
+     * @var int
      */
     private $loglevel;
 
@@ -65,12 +65,12 @@ class Config
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getLogLevel()
+    public function getLogLevel(): int
     {
         if ($this->loglevel === null) {
-            $this->loglevel = $this->scopeConfig->getValue(
+            $this->loglevel = (int) $this->scopeConfig->getValue(
                 'sentry/general/loglevel',
                 \Magento\Store\Model\ScopeInterface::SCOPE_STORE
             );
