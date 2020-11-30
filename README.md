@@ -1,6 +1,6 @@
 Magento 2 Sentry Logger
 
-[![Build Status](https://travis-ci.com/mygento/module-sentry.svg?branch=v2.3)](https://travis-ci.com/mygento/module-sentry)
+[![Build Status](https://travis-ci.com/mygento/module-sentry.svg?branch=v2.4)](https://travis-ci.com/mygento/module-sentry)
 [![Latest Stable Version](https://poser.pugx.org/mygento/module-sentry/v/stable)](https://packagist.org/packages/mygento/module-sentry)
 [![Total Downloads](https://poser.pugx.org/mygento/module-sentry/downloads)](https://packagist.org/packages/mygento/module-sentry)
 
@@ -16,4 +16,4 @@ No overrides or preferences in di.xml
 * Set Environment
 
 ## Compability
-The module is tested on magento version 2.3.x with Sentry SDK version 2.x
+The module is tested on magento version 2.4.x with Sentry SDK version 3.x
