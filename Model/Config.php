@@ -106,6 +106,8 @@ class Config
                     \Magento\Store\Model\ScopeInterface::SCOPE_STORE
                 );
             } catch (\DomainException $e) {
+                unset($e);
+
                 return false;
             }
         }
