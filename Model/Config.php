@@ -138,7 +138,7 @@ class Config
             \Sentry\init([
                 'dsn' => $this->getConnection(),
                 'environment' => $this->getEnvironment() ?? null,
-                'before_send' => function (\Sentry\Event $event, ?\Sentry\EventHint $hint): ?\Sentry\Event {
+                'before_send' => function (\Sentry\Event $event): ?\Sentry\Event {
                     $pattern = $this->getErrorMessageFilterPattern();
                     $message = $event->getMessage();
                     try {
