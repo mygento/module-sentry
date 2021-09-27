@@ -100,10 +100,16 @@ class Config
     public function isEnabled(): bool
     {
         if ($this->enabled === null) {
-            $this->enabled = $this->scopeConfig->getValue(
-                'sentry/general/enabled',
-                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-            );
+            try {
+                $this->enabled = $this->scopeConfig->getValue(
+                    'sentry/general/enabled',
+                    \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+                );
+            } catch (\DomainException $e) {
+                unset($e);
+
+                return false;
+            }
         }
 
         return (bool) $this->enabled;
