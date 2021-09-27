@@ -26,6 +26,11 @@ class Config
     private $environment;
 
     /**
+     * @var string
+     */
+    private $errorMessageFilterPattern;
+
+    /**
      * @var bool
      */
     private $enabled;
@@ -95,6 +100,21 @@ class Config
     }
 
     /**
+     * @return string
+     */
+    public function getErrorMessageFilterPattern()
+    {
+        if ($this->errorMessageFilterPattern === null) {
+            $this->errorMessageFilterPattern = $this->scopeConfig->getValue(
+                'sentry/general/error_message_filter_pattern',
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            );
+        }
+
+        return $this->errorMessageFilterPattern;
+    }
+
+    /**
      * @return bool
      */
     public function isEnabled(): bool
@@ -124,6 +144,22 @@ class Config
             \Sentry\init([
                 'dsn' => $this->getConnection(),
                 'environment' => $this->getEnvironment() ?? null,
+                'before_send' => function (\Sentry\Event $event): ?\Sentry\Event {
+                    $pattern = $this->getErrorMessageFilterPattern();
+                    $message = $event->getMessage();
+
+                    try {
+                        if ($pattern && $message && preg_match($pattern, $message)) {
+                            return null;
+                        }
+                    } catch (\Throwable $th) {
+                        // In case $pattern is invalid, preg_match will throw an exception
+                        // Let's silently ignore that then, and pass through the event.
+                        return $event;
+                    }
+
+                    return $event;
+                },
             ]);
             $this->hub = \Sentry\SentrySdk::getCurrentHub();
         }

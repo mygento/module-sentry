@@ -24,7 +24,11 @@
                 <field id="environment" translate="label comment" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Environment</label>
                 </field>
-<!--                <field id="customer_data" translate="label" type="select" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="error_message_filter_pattern" translate="label comment" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Error Message filter pattern</label>
+                    <comment>RegExp pattern that will be passed to PHP preg_match function in order to filter out errors that shouldn't be sent to Sentry.</comment>
+                </field>
+                <!--                <field id="customer_data" translate="label" type="select" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Collect Customer Data</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>-->
