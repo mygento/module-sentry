@@ -39,7 +39,7 @@ class SentryHandler extends AbstractProcessingHandler
      *
      * @return int
      */
-    public function getLevel()
+    public function getLevel(): int
     {
         return $this->config->getLogLevel();
     }
@@ -47,7 +47,7 @@ class SentryHandler extends AbstractProcessingHandler
     /**
      * @inheritdoc
      */
-    public function isHandling(array $record)
+    public function isHandling(array $record): bool
     {
         if (!$this->config->isEnabled()) {
             return false;
