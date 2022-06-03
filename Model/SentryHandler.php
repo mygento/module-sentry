@@ -2,7 +2,7 @@
 
 /**
  * @author Mygento Team
- * @copyright 2017-2019 Mygento (https://www.mygento.ru)
+ * @copyright 2017-2021 Mygento (https://www.mygento.com)
  * @package Mygento_Sentry
  */
 
@@ -52,7 +52,13 @@ class SentryHandler extends AbstractProcessingHandler
         if (!$this->config->isEnabled()) {
             return false;
         }
-        $this->setLevel($this->config->getLogLevel());
+
+        $this->setLevel(
+            Logger::getLevelName(
+                /** @phpstan-ignore-next-line */
+                $this->config->getLogLevel()
+            )
+        );
 
         return parent::isHandling($record);
     }

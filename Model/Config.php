@@ -2,7 +2,7 @@
 
 /**
  * @author Mygento Team
- * @copyright 2017-2019 Mygento (https://www.mygento.ru)
+ * @copyright 2017-2021 Mygento (https://www.mygento.com)
  * @package Mygento_Sentry
  */
 
@@ -84,10 +84,7 @@ class Config
         return $this->loglevel;
     }
 
-    /**
-     * @return string
-     */
-    public function getEnvironment()
+    public function getEnvironment(): ?string
     {
         if ($this->environment === null) {
             $this->environment = $this->scopeConfig->getValue(
@@ -99,10 +96,7 @@ class Config
         return $this->environment;
     }
 
-    /**
-     * @return string
-     */
-    public function getErrorMessageFilterPattern()
+    public function getErrorMessageFilterPattern(): ?string
     {
         if ($this->errorMessageFilterPattern === null) {
             $this->errorMessageFilterPattern = $this->scopeConfig->getValue(
@@ -114,9 +108,6 @@ class Config
         return $this->errorMessageFilterPattern;
     }
 
-    /**
-     * @return bool
-     */
     public function isEnabled(): bool
     {
         if ($this->enabled === null) {
