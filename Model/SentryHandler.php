@@ -24,14 +24,24 @@ class SentryHandler extends AbstractProcessingHandler
     private $config;
 
     /**
+     * @var array
+     */
+    private $excludedExceptions;
+
+    /**
      * @param \Mygento\Sentry\Model\Config $config
      * @param bool $bubble
+     * @param array $excludedExceptions
      */
-    public function __construct(Config $config, bool $bubble = true)
-    {
+    public function __construct(
+        Config $config,
+        bool $bubble = true,
+        array $excludedExceptions = []
+    ) {
         $this->config = $config;
         parent::__construct();
         $this->bubble = $bubble;
+        $this->excludedExceptions = $excludedExceptions;
     }
 
     /**
@@ -49,7 +59,7 @@ class SentryHandler extends AbstractProcessingHandler
      */
     public function isHandling(array $record): bool
     {
-        if (!$this->config->isEnabled()) {
+        if (!$this->config->isEnabled() || $this->isGraphQLExceptionExcluded($record)) {
             return false;
         }
 
@@ -127,5 +137,29 @@ class SentryHandler extends AbstractProcessingHandler
     private function getHub()
     {
         return $this->config->getHub();
+    }
+
+    /**
+     * @param array $record
+     * @return bool
+     */
+    private function isGraphQLExceptionExcluded(array $record)
+    {
+        if (!$this->config->isGraphQLExceptionsExcluded()) {
+            return false;
+        }
+
+        $mainException = $record['context']['exception'] ?? null;
+
+        if (!is_object($mainException)) {
+            return false;
+        }
+        $exception = $mainException->getPrevious();
+
+        if (!is_object($exception)) {
+            return false;
+        }
+
+        return in_array(get_class($exception), $this->excludedExceptions);
     }
 }
