@@ -31,7 +31,7 @@ class SentryHandler extends AbstractProcessingHandler
     /**
      * @param \Mygento\Sentry\Model\Config $config
      * @param bool $bubble
-     * @param array $excludedExceptions
+     * @param array $excludedGraphQlExceptions
      */
     public function __construct(
         Config $config,
