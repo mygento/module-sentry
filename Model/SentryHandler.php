@@ -26,7 +26,7 @@ class SentryHandler extends AbstractProcessingHandler
     /**
      * @var array
      */
-    private $excludedExceptions;
+    private $excludedGraphQlExceptions;
 
     /**
      * @param \Mygento\Sentry\Model\Config $config
@@ -36,12 +36,12 @@ class SentryHandler extends AbstractProcessingHandler
     public function __construct(
         Config $config,
         bool $bubble = true,
-        array $excludedExceptions = []
+        array $excludedGraphQlExceptions = []
     ) {
         $this->config = $config;
         parent::__construct();
         $this->bubble = $bubble;
-        $this->excludedExceptions = $excludedExceptions;
+        $this->excludedGraphQlExceptions = $excludedGraphQlExceptions;
     }
 
     /**
@@ -160,6 +160,6 @@ class SentryHandler extends AbstractProcessingHandler
             return false;
         }
 
-        return in_array(get_class($exception), $this->excludedExceptions);
+        return in_array(get_class($exception), $this->excludedGraphQlExceptions);
     }
 }

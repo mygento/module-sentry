@@ -31,7 +31,7 @@
     </type>
     <type name="Mygento\Sentry\Model\SentryHandler">
         <arguments>
-            <argument name="excludedExceptions" xsi:type="array">
+            <argument name="excludedGraphQlExceptions" xsi:type="array">
                 <item name="GraphQlInputException" xsi:type="string">Magento\Framework\GraphQl\Exception\GraphQlInputException</item>
                 <item name="GraphQlAuthenticationException" xsi:type="string">Magento\Framework\GraphQl\Exception\GraphQlAuthenticationException</item>
                 <item name="GraphQlAuthorizationException" xsi:type="string">Magento\Framework\GraphQl\Exception\GraphQlAuthorizationException</item>
