@@ -48,7 +48,7 @@ class Config
     /**
      * @var bool
      */
-    private $isGraphQLExceptionsExcluded;
+    private $isExceptionsExcludeActive;
 
     /**
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
@@ -166,15 +166,15 @@ class Config
     /**
      * @return bool
      */
-    public function isGraphQLExceptionsExcluded(): bool
+    public function isExceptionsExcludeActive(): bool
     {
-        if ($this->isGraphQLExceptionsExcluded === null) {
-            $this->isGraphQLExceptionsExcluded = $this->scopeConfig->isSetFlag(
-                'sentry/general/exclude_graphql_exceptions',
+        if ($this->isExceptionsExcludeActive === null) {
+            $this->isExceptionsExcludeActive = $this->scopeConfig->isSetFlag(
+                'sentry/general/exclude_exceptions',
                 \Magento\Store\Model\ScopeInterface::SCOPE_STORE
             );
         }
 
-        return $this->isGraphQLExceptionsExcluded;
+        return $this->isExceptionsExcludeActive;
     }
 }
