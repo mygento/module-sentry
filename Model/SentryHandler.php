@@ -18,7 +18,7 @@ use Sentry\State\Scope;
 
 class SentryHandler extends AbstractProcessingHandler
 {
-    protected const EXCEPTION_DEEPEST_LEVEL = 5;
+    private const EXCEPTION_DEEPEST_LEVEL = 5;
 
     /**
      * @var \Mygento\Sentry\Model\Config
