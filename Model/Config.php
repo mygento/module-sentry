@@ -46,6 +46,11 @@ class Config
     private $hub;
 
     /**
+     * @var bool
+     */
+    private $isExceptionsExcludeActive;
+
+    /**
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
      */
     public function __construct(
@@ -156,5 +161,20 @@ class Config
         }
 
         return $this->hub;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isExceptionsExcludeActive(): bool
+    {
+        if ($this->isExceptionsExcludeActive === null) {
+            $this->isExceptionsExcludeActive = $this->scopeConfig->isSetFlag(
+                'sentry/general/exclude_exceptions',
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+            );
+        }
+
+        return $this->isExceptionsExcludeActive;
     }
 }

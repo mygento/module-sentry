@@ -4,6 +4,7 @@
     <sentry>
       <general>
         <loglevel>300</loglevel>
+        <exclude_exceptions>0</exclude_exceptions>
       </general>
     </sentry>
   </default>

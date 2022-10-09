@@ -18,20 +18,32 @@ use Sentry\State\Scope;
 
 class SentryHandler extends AbstractProcessingHandler
 {
+    private const EXCEPTION_DEEPEST_LEVEL = 5;
+
     /**
      * @var \Mygento\Sentry\Model\Config
      */
     private $config;
 
     /**
+     * @var array
+     */
+    private $excludedExceptions;
+
+    /**
      * @param \Mygento\Sentry\Model\Config $config
      * @param bool $bubble
+     * @param array $excludedExceptions
      */
-    public function __construct(Config $config, bool $bubble = true)
-    {
+    public function __construct(
+        Config $config,
+        bool $bubble = true,
+        array $excludedExceptions = []
+    ) {
         $this->config = $config;
         parent::__construct();
         $this->bubble = $bubble;
+        $this->excludedExceptions = $excludedExceptions;
     }
 
     /**
@@ -49,7 +61,7 @@ class SentryHandler extends AbstractProcessingHandler
      */
     public function isHandling(array $record): bool
     {
-        if (!$this->config->isEnabled()) {
+        if (!$this->config->isEnabled() || $this->isRecordWithExcludedException($record)) {
             return false;
         }
 
@@ -127,5 +139,42 @@ class SentryHandler extends AbstractProcessingHandler
     private function getHub()
     {
         return $this->config->getHub();
+    }
+
+    /**
+     * @param array $record
+     * @return bool
+     */
+    private function isRecordWithExcludedException(array $record)
+    {
+        if (!$this->config->isExceptionsExcludeActive()) {
+            return false;
+        }
+
+        $mainException = $record['context']['exception'] ?? null;
+
+        if (!is_object($mainException)) {
+            return false;
+        }
+
+        if (in_array(get_class($mainException), $this->excludedExceptions)) {
+            return true;
+        }
+
+        for ($i = 1; $i <= self::EXCEPTION_DEEPEST_LEVEL; $i++) {
+            $exception = $mainException->getPrevious();
+
+            if (!is_object($exception)) {
+                return false;
+            }
+
+            if (in_array(get_class($exception), $this->excludedExceptions)) {
+                return true;
+            }
+
+            $mainException = $exception;
+        }
+
+        return false;
     }
 }

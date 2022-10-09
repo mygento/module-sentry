@@ -29,4 +29,13 @@
     <type name="Magento\Framework\App\Config">
         <plugin name="mygento_sentry_cache_invalidation" type="Mygento\Sentry\Plugin\CacheInvalidationPlugin" />
     </type>
+    <type name="Mygento\Sentry\Model\SentryHandler">
+        <arguments>
+            <argument name="excludedExceptions" xsi:type="array">
+                <item name="GraphQlInputException" xsi:type="string">Magento\Framework\GraphQl\Exception\GraphQlInputException</item>
+                <item name="GraphQlAuthenticationException" xsi:type="string">Magento\Framework\GraphQl\Exception\GraphQlAuthenticationException</item>
+                <item name="GraphQlAuthorizationException" xsi:type="string">Magento\Framework\GraphQl\Exception\GraphQlAuthorizationException</item>
+            </argument>
+        </arguments>
+    </type>
 </config>
