@@ -31,7 +31,7 @@ class WebapiCatcher
      */
     public function afterApiShutdownFunction(
         \Magento\Framework\Webapi\ErrorProcessor $subject,
-        $result,
+        $result
     ) {
         $this->config->getHub()->captureLastError();
 

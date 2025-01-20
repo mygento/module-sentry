@@ -33,7 +33,7 @@ class HttpCatcher
     public function beforeCatchException(
         \Magento\Framework\App\Http $subject,
         \Magento\Framework\App\Bootstrap $bootstrap,
-        \Exception $exception,
+        \Exception $exception
     ) {
         $this->logger->critical($exception);
     }
