@@ -54,7 +54,7 @@ class Config
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
      */
     public function __construct(
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
+        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
     ) {
         $this->scopeConfig = $scopeConfig;
     }
@@ -67,7 +67,7 @@ class Config
         if ($this->connection === null) {
             $this->connection = $this->scopeConfig->getValue(
                 'sentry/general/connection',
-                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
             );
         }
 
@@ -82,7 +82,7 @@ class Config
         if ($this->loglevel === null) {
             $this->loglevel = (int) $this->scopeConfig->getValue(
                 'sentry/general/loglevel',
-                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
             );
         }
 
@@ -94,7 +94,7 @@ class Config
         if ($this->environment === null) {
             $this->environment = $this->scopeConfig->getValue(
                 'sentry/general/environment',
-                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
             );
         }
 
@@ -106,7 +106,7 @@ class Config
         if ($this->errorMessageFilterPattern === null) {
             $this->errorMessageFilterPattern = $this->scopeConfig->getValue(
                 'sentry/general/error_message_filter_pattern',
-                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
             );
         }
 
@@ -119,7 +119,7 @@ class Config
             try {
                 $this->enabled = $this->scopeConfig->getValue(
                     'sentry/general/enabled',
-                    \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+                    \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
                 );
             } catch (\DomainException $e) {
                 unset($e);
@@ -171,7 +171,7 @@ class Config
         if ($this->isExceptionsExcludeActive === null) {
             $this->isExceptionsExcludeActive = $this->scopeConfig->isSetFlag(
                 'sentry/general/exclude_exceptions',
-                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
             );
         }
 
