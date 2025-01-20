@@ -16,4 +16,4 @@ No overrides or preferences in di.xml
 * Set Environment
 
 ## Compability
-The module is tested on magento version 2.4.x with Sentry SDK version 3.x
+The module is tested on magento version 2.4.x with Sentry SDK version 4.x

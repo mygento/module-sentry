@@ -2,7 +2,7 @@
 
 /**
  * @author Mygento Team
- * @copyright 2017-2021 Mygento (https://www.mygento.com)
+ * @copyright 2017-2025 Mygento (https://www.mygento.com)
  * @package Mygento_Sentry
  */
 
