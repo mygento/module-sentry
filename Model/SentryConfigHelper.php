@@ -33,5 +33,6 @@ class SentryConfigHelper
         $this->config->isEnabled();
         $this->config->getEnvironment();
         $this->config->getHub();
+        $this->config->getRelease();
     }
 }

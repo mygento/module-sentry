@@ -8,6 +8,8 @@
 
 namespace Mygento\Sentry\Model;
 
+use Magento\Framework\App\Config\ScopeConfigInterface;
+
 class Config
 {
     /**
@@ -36,11 +38,6 @@ class Config
     private $enabled;
 
     /**
-     * @var \Magento\Framework\App\Config\ScopeConfigInterface
-     */
-    private $scopeConfig;
-
-    /**
      * @var \Sentry\State\HubInterface
      */
     private $hub;
@@ -50,13 +47,16 @@ class Config
      */
     private $isExceptionsExcludeActive;
 
-    /**
-     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
-     */
+    private ?string $release = null;
+    private ScopeConfigInterface $scopeConfig;
+    private ReleaseIdentifier $releaseIdentifier;
+
     public function __construct(
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
+        ScopeConfigInterface $scopeConfig,
+        ReleaseIdentifier $releaseIdentifier
     ) {
         $this->scopeConfig = $scopeConfig;
+        $this->releaseIdentifier = $releaseIdentifier;
     }
 
     /**
@@ -176,5 +176,14 @@ class Config
         }
 
         return $this->isExceptionsExcludeActive;
+    }
+
+    public function getRelease(): string
+    {
+        if ($this->release == null) {
+            $this->release = $this->releaseIdentifier->getValue();
+        }
+
+        return $this->release;
     }
 }
