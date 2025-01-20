@@ -19,7 +19,7 @@ class HttpCatcher
      * @param \Magento\Framework\Logger\Monolog $logger
      */
     public function __construct(
-        \Magento\Framework\Logger\Monolog $logger,
+        \Magento\Framework\Logger\Monolog $logger
     ) {
         $this->logger = $logger;
     }

@@ -30,7 +30,8 @@
         "nyholm/psr7": "^1.3.2"
     },
     "require-dev": {
-        "mygento/coding-standard": "~2.14.0-RC4"
+        "mygento/coding-standard": "2.14.4",
+        "phpro/grumphp": "^1.5"
     },
     "autoload": {
         "files": [

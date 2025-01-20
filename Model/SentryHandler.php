@@ -38,7 +38,7 @@ class SentryHandler extends AbstractProcessingHandler
     public function __construct(
         Config $config,
         bool $bubble = true,
-        array $excludedExceptions = [],
+        array $excludedExceptions = []
     ) {
         $this->config = $config;
         parent::__construct();

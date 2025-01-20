@@ -19,7 +19,7 @@ class WebapiCatcher
      * @param \Mygento\Sentry\Model\Config $config
      */
     public function __construct(
-        \Mygento\Sentry\Model\Config $config,
+        \Mygento\Sentry\Model\Config $config
     ) {
         $this->config = $config;
     }
