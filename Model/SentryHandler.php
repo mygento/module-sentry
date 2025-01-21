@@ -93,7 +93,10 @@ class SentryHandler extends AbstractProcessingHandler
         $event->setLevel($this->getLogLevel($record['level']));
         $event->setMessage($record['message']);
         $event->setLogger(sprintf('monolog.%s', $record['channel']));
-        $event->setRelease($this->config->getRelease());
+        $release = $this->config->getRelease();
+        if ($release) {
+            $event->setRelease($release);
+        }
 
         $hint = new EventHint();
 

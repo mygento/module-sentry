@@ -184,6 +184,6 @@ class Config
             $this->release = $this->releaseIdentifier->getValue();
         }
 
-        return $this->release;
+        return (string) $this->release;
     }
 }
