@@ -47,9 +47,23 @@ class Config
      */
     private $isExceptionsExcludeActive;
 
-    private ?string $release = null;
+    /**
+     * @var string|null
+     */
+    private $release = null;
+
     private ScopeConfigInterface $scopeConfig;
     private ReleaseIdentifier $releaseIdentifier;
+
+    /**
+     * @var float|null
+     */
+    private $profilesRate = null;
+
+    /**
+     * @var float|null
+     */
+    private $tracesRate = null;
 
     public function __construct(
         ScopeConfigInterface $scopeConfig,
@@ -89,7 +103,43 @@ class Config
         return $this->loglevel;
     }
 
-    public function getEnvironment(): ?string
+    /**
+     * @return float|null
+     */
+    public function getProfilesSampleRate()
+    {
+        if ($this->profilesRate === null) {
+            $this->profilesRate = $this->scopeConfig->isSetFlag(
+                'sentry/general/profile_enabled',
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            ) ? (float) $this->scopeConfig->getValue(
+                'sentry/general/profiles_sample_rate',
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            ) : null;
+        }
+
+        return $this->profilesRate;
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getTracesSampleRate()
+    {
+        if ($this->tracesRate === null) {
+            $this->tracesRate = $this->scopeConfig->isSetFlag(
+                'sentry/general/traces_enabled',
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            ) ? (float) $this->scopeConfig->getValue(
+                'sentry/general/traces_sample_rate',
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            ) : null;
+        }
+
+        return $this->tracesRate;
+    }
+
+    public function getEnvironment()
     {
         if ($this->environment === null) {
             $this->environment = $this->scopeConfig->getValue(
@@ -139,6 +189,8 @@ class Config
         if ($this->hub === null) {
             \Sentry\init([
                 'dsn' => $this->getConnection(),
+                'traces_sample_rate' => $this->getTracesSampleRate(),
+                'profiles_sample_rate' => $this->getProfilesSampleRate(),
                 'environment' => $this->getEnvironment() ?? null,
                 'before_send' => function (\Sentry\Event $event): ?\Sentry\Event {
                     $pattern = $this->getErrorMessageFilterPattern();
@@ -184,6 +236,6 @@ class Config
             $this->release = $this->releaseIdentifier->getValue();
         }
 
-        return (string) $this->release;
+        return $this->release;
     }
 }

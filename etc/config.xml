@@ -5,6 +5,8 @@
       <general>
         <loglevel>300</loglevel>
         <exclude_exceptions>0</exclude_exceptions>
+        <profiles_sample_rate>1.0</profiles_sample_rate>
+        <traces_sample_rate>1.0</traces_sample_rate>
       </general>
     </sentry>
   </default>
