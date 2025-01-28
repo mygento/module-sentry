@@ -19,7 +19,8 @@
                     <source_model>Mygento\Sentry\Model\Source\Loglevel</source_model>
                 </field>
                 <field id="connection" translate="label comment" type="text" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Connection String</label>
+                    <label>DSN</label>
+                    <comment>Like https://33345d455defffffffbb998c820fff@debug.youdomain.com/99</comment>
                 </field>
                 <field id="environment" translate="label comment" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Environment</label>
