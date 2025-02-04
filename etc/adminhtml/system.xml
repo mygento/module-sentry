@@ -33,28 +33,6 @@
                     <label>Enable Exceptions Excluding</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="traces_enabled" translate="label" type="select" sortOrder="210" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Enable Trace</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                </field>
-                <field id="traces_sample_rate" translate="label" type="text" sortOrder="220" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Trace Rate</label>
-                    <validate>validate-zero-or-greater</validate>
-                    <depends>
-                        <field id="traces_enabled">1</field>
-                    </depends>
-                </field>
-                <field id="profile_enabled" translate="label" type="select" sortOrder="230" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Enable Profiling</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                </field>
-                <field id="profiles_sample_rate" translate="label" type="text" sortOrder="240" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Profile Rate</label>
-                    <validate>validate-zero-or-greater</validate>
-                    <depends>
-                        <field id="profile_enabled">1</field>
-                    </depends>
-                </field>
                 <!--                <field id="customer_data" translate="label" type="select" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Collect Customer Data</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
