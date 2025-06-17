@@ -57,7 +57,7 @@ class Config
 
     public function __construct(
         ScopeConfigInterface $scopeConfig,
-        ReleaseIdentifier $releaseIdentifier
+        ReleaseIdentifier $releaseIdentifier,
     ) {
         $this->scopeConfig = $scopeConfig;
         $this->releaseIdentifier = $releaseIdentifier;
@@ -78,9 +78,6 @@ class Config
         return $this->connection;
     }
 
-    /**
-     * @return int
-     */
     public function getLogLevel(): int
     {
         if ($this->loglevel === null) {
@@ -93,7 +90,7 @@ class Config
         return $this->loglevel;
     }
 
-    public function getEnvironment()
+    public function getEnvironment(): ?string
     {
         if ($this->environment === null) {
             $this->environment = $this->scopeConfig->getValue(

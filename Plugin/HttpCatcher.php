@@ -19,7 +19,7 @@ class HttpCatcher
      * @param \Magento\Framework\Logger\Monolog $logger
      */
     public function __construct(
-        \Magento\Framework\Logger\Monolog $logger
+        \Magento\Framework\Logger\Monolog $logger,
     ) {
         $this->logger = $logger;
     }
@@ -33,8 +33,8 @@ class HttpCatcher
     public function beforeCatchException(
         \Magento\Framework\App\Http $subject,
         \Magento\Framework\App\Bootstrap $bootstrap,
-        \Exception $exception
-    ) {
+        \Exception $exception,
+    ): void {
         $this->logger->critical($exception);
     }
 }

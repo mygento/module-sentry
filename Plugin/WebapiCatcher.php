@@ -19,7 +19,7 @@ class WebapiCatcher
      * @param \Mygento\Sentry\Model\Config $config
      */
     public function __construct(
-        \Mygento\Sentry\Model\Config $config
+        \Mygento\Sentry\Model\Config $config,
     ) {
         $this->config = $config;
     }
@@ -31,8 +31,8 @@ class WebapiCatcher
      */
     public function afterApiShutdownFunction(
         \Magento\Framework\Webapi\ErrorProcessor $subject,
-        $result
-    ) {
+        $result,
+    ): mixed {
         $this->config->getHub()->captureLastError();
 
         return $result;

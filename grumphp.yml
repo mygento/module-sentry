@@ -18,4 +18,4 @@ grumphp:
         phpstan:
           autoload_file: 'vendor/mygento/coding-standard/stan/autoload.php'
           ignore_patterns: ['Test']
-          level: 5
+          level: 6

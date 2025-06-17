@@ -16,7 +16,7 @@ class ReleaseIdentifier
     private StorageInterface $versionStorage;
 
     public function __construct(
-        StorageInterface $versionStorage
+        StorageInterface $versionStorage,
     ) {
         $this->versionStorage = $versionStorage;
     }
