@@ -9,20 +9,16 @@
 namespace Mygento\Sentry\Model;
 
 use Magento\Framework\App\View\Deployment\Version\StorageInterface;
-use Psr\Log\LoggerInterface;
 
 class ReleaseIdentifier
 {
     private ?string $cachedValue = null;
     private StorageInterface $versionStorage;
-    private LoggerInterface $logger;
 
     public function __construct(
-        StorageInterface $versionStorage,
-        LoggerInterface $logger
+        StorageInterface $versionStorage
     ) {
         $this->versionStorage = $versionStorage;
-        $this->logger = $logger;
     }
 
     public function getValue(): ?string
@@ -34,7 +30,7 @@ class ReleaseIdentifier
         try {
             $this->cachedValue = (string) $this->versionStorage->load();
         } catch (\Throwable $e) {
-            $this->logger->critical('Can not load static content version.', ['exception' => $e]);
+            unset($e);
         }
 
         return $this->cachedValue;
