@@ -26,7 +26,7 @@ class SentryConfigHelper
     /**
      * Gets sentry config values from scope config and saves to config object's properties
      */
-    public function prepareSentryConfig()
+    public function prepareSentryConfig(): void
     {
         $this->config->getConnection();
         $this->config->getLogLevel();

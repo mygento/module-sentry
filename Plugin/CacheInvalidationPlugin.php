@@ -32,7 +32,7 @@ class CacheInvalidationPlugin
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function beforeClean($subject)
+    public function beforeClean($subject): void
     {
         $this->sentryConfigHelper->prepareSentryConfig();
     }

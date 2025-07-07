@@ -34,7 +34,7 @@ class HttpCatcher
         \Magento\Framework\App\Http $subject,
         \Magento\Framework\App\Bootstrap $bootstrap,
         \Exception $exception
-    ) {
+    ): void {
         $this->logger->critical($exception);
     }
 }
