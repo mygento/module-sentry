@@ -23,13 +23,12 @@
         "sentry"
     ],
     "require": {
-        "magento/framework": "103.*",
+        "magento/framework": "^103.0.8",
         "magento/module-config": "101.*",
-        "sentry/sdk": "^4",
-        "monolog/monolog": "<3"
+        "sentry/sdk": "^4"
     },
     "require-dev": {
-        "mygento/coding-standard": ">=2.14.0 <2.14.5"
+        "mygento/coding-standard": "~2.14.5"
     },
     "autoload": {
         "files": [

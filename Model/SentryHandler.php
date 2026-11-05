@@ -9,7 +9,8 @@
 namespace Mygento\Sentry\Model;
 
 use Monolog\Handler\AbstractProcessingHandler;
-use Monolog\Logger;
+use Monolog\Level;
+use Monolog\LogRecord;
 use Sentry\Event;
 use Sentry\EventHint;
 use Sentry\Severity;
@@ -26,19 +27,17 @@ class SentryHandler extends AbstractProcessingHandler
     private $config;
 
     /**
-     * @var array
+     * @var array<string,string>
      */
     private $excludedExceptions;
 
     /**
-     * @param \Mygento\Sentry\Model\Config $config
-     * @param bool $bubble
-     * @param array $excludedExceptions
+     * @param array<string,string> $excludedExceptions
      */
     public function __construct(
         Config $config,
         bool $bubble = true,
-        array $excludedExceptions = []
+        array $excludedExceptions = [],
     ) {
         $this->config = $config;
         parent::__construct();
@@ -47,26 +46,27 @@ class SentryHandler extends AbstractProcessingHandler
     }
 
     /**
-     * Gets minimum logging level at which this handler will be triggered.
-     *
-     * @return int
+     * @inheritDoc
      */
-    public function getLevel(): int
+    public function getLevel(): Level
     {
-        return $this->config->getLogLevel();
+        return Level::fromValue(
+            /** @phpstan-ignore-next-line */
+            $this->config->getLogLevel(),
+        );
     }
 
     /**
      * @inheritdoc
      */
-    public function isHandling(array $record): bool
+    public function isHandling(LogRecord $record): bool
     {
         if (!$this->config->isEnabled() || $this->isRecordWithExcludedException($record)) {
             return false;
         }
 
         $this->setLevel(
-            Logger::getLevelName(
+            Level::fromValue(
                 /** @phpstan-ignore-next-line */
                 $this->config->getLogLevel(),
             ),
@@ -75,24 +75,15 @@ class SentryHandler extends AbstractProcessingHandler
         return parent::isHandling($record);
     }
 
-    /*
-     * @inheritDoc
-
-    protected function getDefaultFormatter(): FormatterInterface
-    {
-        return new LineFormatter('[%channel%] %message%');
-    }
-    */
-
     /**
      * @inheritdoc
      */
-    protected function write(array $record): void
+    protected function write(LogRecord $record): void
     {
         $event = Event::createEvent();
-        $event->setLevel($this->getLogLevel($record['level']));
-        $event->setMessage($record['message']);
-        $event->setLogger(sprintf('monolog.%s', $record['channel']));
+        $event->setLevel($this->getLogLevel($record->level));
+        $event->setMessage($record->message);
+        $event->setLogger(sprintf('monolog.%s', $record->channel));
         $release = $this->config->getRelease();
         if ($release) {
             $event->setRelease($release);
@@ -100,62 +91,52 @@ class SentryHandler extends AbstractProcessingHandler
 
         $hint = new EventHint();
 
-        if (isset($record['context']['exception']) && $record['context']['exception'] instanceof \Throwable) {
-            $hint->exception = $record['context']['exception'];
+        if (isset($record->context['exception']) && $record->context['exception'] instanceof \Throwable) {
+            $hint->exception = $record->context['exception'];
         }
 
         $this->getHub()->withScope(function (Scope $scope) use ($record, $event, $hint): void {
-            $scope->setExtra('monolog.channel', $record['channel']);
-            $scope->setExtra('monolog.level', $record['level_name']);
-
+            $scope->setExtra('monolog.channel', $record->channel);
+            $scope->setExtra('monolog.level', $record->level->name);
             $this->getHub()->captureEvent($event, $hint);
         });
     }
 
     /**
      * Translates the Monolog level into the Sentry severity.
-     *
-     * @param int $level The Monolog log level
      */
-    private function getLogLevel(int $level): Severity
+    private function getLogLevel(Level $level): Severity
     {
         switch ($level) {
-            case Logger::DEBUG:
+            case Level::Debug:
                 return Severity::debug();
-            case Logger::WARNING:
+            case Level::Warning:
                 return Severity::warning();
-            case Logger::ERROR:
+            case Level::Error:
                 return Severity::error();
-            case Logger::CRITICAL:
-            case Logger::ALERT:
-            case Logger::EMERGENCY:
+            case Level::Critical:
+            case Level::Alert:
+            case Level::Emergency:
                 return Severity::fatal();
-            case Logger::INFO:
-            case Logger::NOTICE:
+            case Level::Info:
+            case Level::Notice:
             default:
                 return Severity::info();
         }
     }
 
-    /**
-     * @return HubInterface
-     */
-    private function getHub()
+    private function getHub(): HubInterface
     {
         return $this->config->getHub();
     }
 
-    /**
-     * @param array $record
-     * @return bool
-     */
-    private function isRecordWithExcludedException(array $record)
+    private function isRecordWithExcludedException(LogRecord $record): bool
     {
         if (!$this->config->isExceptionsExcludeActive()) {
             return false;
         }
 
-        $mainException = $record['context']['exception'] ?? null;
+        $mainException = $record->context['exception'] ?? null;
 
         if (!is_object($mainException)) {
             return false;

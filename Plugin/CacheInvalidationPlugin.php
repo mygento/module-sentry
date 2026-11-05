@@ -30,7 +30,7 @@ class CacheInvalidationPlugin
      *
      * @param \Magento\Framework\App\Config $subject
      *
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @SuppressWarnings("PHPMD.UnusedFormalParameter")
      */
     public function beforeClean($subject): void
     {

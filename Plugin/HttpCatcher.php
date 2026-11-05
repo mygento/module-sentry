@@ -8,32 +8,23 @@
 
 namespace Mygento\Sentry\Plugin;
 
+use Magento\Framework\App\Bootstrap;
+use Magento\Framework\App\Http;
+use Magento\Framework\Logger\Monolog;
+
 class HttpCatcher
 {
-    /**
-     * @var \Magento\Framework\Logger\Monolog
-     */
-    private $logger;
-
-    /**
-     * @param \Magento\Framework\Logger\Monolog $logger
-     */
     public function __construct(
-        \Magento\Framework\Logger\Monolog $logger
-    ) {
-        $this->logger = $logger;
-    }
+        private Monolog $logger,
+    ) {}
 
     /**
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-     * @param \Magento\Framework\App\Http $subject
-     * @param \Magento\Framework\App\Bootstrap $bootstrap
-     * @param \Exception $exception
+     * @SuppressWarnings("PHPMD.UnusedFormalParameter")
      */
     public function beforeCatchException(
-        \Magento\Framework\App\Http $subject,
-        \Magento\Framework\App\Bootstrap $bootstrap,
-        \Exception $exception
+        Http $subject,
+        Bootstrap $bootstrap,
+        \Exception $exception,
     ): void {
         $this->logger->critical($exception);
     }

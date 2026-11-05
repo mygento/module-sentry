@@ -57,7 +57,7 @@ class Config
 
     public function __construct(
         ScopeConfigInterface $scopeConfig,
-        ReleaseIdentifier $releaseIdentifier
+        ReleaseIdentifier $releaseIdentifier,
     ) {
         $this->scopeConfig = $scopeConfig;
         $this->releaseIdentifier = $releaseIdentifier;

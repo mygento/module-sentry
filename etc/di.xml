@@ -9,7 +9,7 @@
     <type name="Mygento\Base\Model\LogManager">
         <arguments>
             <argument name="handlers" xsi:type="array">
-                <item name="sentry" xsi:type="object">Mygento\Sentry\Model\SentryHandler</item>
+                <item name="sentry" xsi:type="object">Mygento\Sentry\Model\SentryHandlerFactory</item>
             </argument>
         </arguments>
     </type>
