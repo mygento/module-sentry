@@ -19,6 +19,7 @@ class SentryConfigHelper
     {
         if ($this->config->isEnabled()) {
             $this->config->getLogLevel();
+            $this->config->getEnvironment();
             $this->config->getHub();
             $this->config->getRelease();
         }
