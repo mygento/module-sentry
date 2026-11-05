@@ -33,7 +33,9 @@ class WebapiCatcher
         \Magento\Framework\Webapi\ErrorProcessor $subject,
         $result,
     ): mixed {
-        $this->config->getHub()->captureLastError();
+        if ($this->config->isEnabled()) {
+            $this->config->getHub()->captureLastError();
+        }
 
         return $result;
     }
