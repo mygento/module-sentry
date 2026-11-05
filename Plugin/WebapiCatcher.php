@@ -25,7 +25,7 @@ class WebapiCatcher
     }
 
     /**
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @SuppressWarnings("PHPMD.UnusedFormalParameter")
      * @param \Magento\Framework\Webapi\ErrorProcessor $subject
      * @param mixed $result
      */
