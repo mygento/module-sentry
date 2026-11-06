@@ -19,6 +19,7 @@
                 <item name="sentry" xsi:type="object">Mygento\Sentry\Model\SentryHandler</item>
                 <item name="system" xsi:type="object">Magento\Framework\Logger\Handler\System</item>
                 <item name="debug" xsi:type="object">Magento\Framework\Logger\Handler\Debug</item>
+                <item name="syslog" xsi:type="object">Magento\Framework\Logger\Handler\Syslog</item>
             </argument>
         </arguments>
     </type>
